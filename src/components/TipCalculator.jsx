@@ -6,11 +6,16 @@ function TipCalculator() {
   const [people, setPeople] = useState(1)
   const tipOptions = [10, 15, 20]
 
+  const tip = bill * ((tipPercent + 100) / 100)
+  const total = bill + tip
+  const perPerson = people > 0 ? total / people : 0
+
   const handleTip = (percent) => {
     setTipPercent(percent)
+
   }
 
-  
+
 
   // TODO 1: แปลง bill (string) เป็นตัวเลขที่ปลอดภัย (กัน NaN)
   // TODO 2: คำนวณ tip, total, perPerson สดตอน render — ห้ามเป็น useState
@@ -37,7 +42,8 @@ function TipCalculator() {
         <button
           key={percent}
           type="button"
-          className="flex-row bg-blue-500"
+          className={tipPercent === percent ? " flex-row bg-blue-500" : "flex-row"}
+
           onClick={() => handleTip(percent)}
         >
           {percent}%
@@ -55,9 +61,21 @@ function TipCalculator() {
       </div>
 
       {/*reset */}
-      <button button
-        className=""
-        onClick={() => { setBill(0); setPeople(1); }}>reset</button>
+      <button
+        type="button"
+        className="bg-red-300"
+        onClick={() => {
+          setBill(0)
+          setTipPercent(10)
+          setPeople(1)
+        }}
+      >
+        reset
+      </button>
+
+      <p>ทิปรวม: {tip.toFixed(2)}</p>
+      <p>ยอดรวม: {total.toFixed(2)}</p>
+      <p>คนละ: {perPerson.toFixed(2)}</p>
     </section >
   )
 }
