@@ -8,7 +8,7 @@ import { useState } from 'react'
 // TODO B2: กรอกถูกทุกช่องแล้ว submit → แสดงข้อความสำเร็จบนหน้าจอ (ไม่ใช่แค่ console.log)
 
 function RegisterForm() {
-  const [form, setForm] = useState({ name: "", email: "", age: "" })
+  const [form, setForm] = useState({ name: "", email: "", age: "" , phone: ""})
   const [errors, setErrors] = useState({})
 
   const updateField = (field, value) => {
@@ -19,7 +19,8 @@ function RegisterForm() {
   const validate = () => {
     const newErrors = {}
     if (form.name.trim() === "") newErrors.name = "กรุณากรอกชื่อ"
-    if (!form.email.includes("@")) newErrors.email = "อีเมลไม่ถูกต้อง"
+    if (!form.email.includes("@") || !form.email.includes(".")) newErrors.email = "อีเมลไม่ถูกต้อง"
+    if (!form.phone.startsWith("0") || form.phone.length !== 10) newErrors.phone = "เบอร์โทรต้องเป็นตัวเลข 10 หลัก ขึ้นต้นด้วย 0"
     const ageNum = Number(form.age)
     if (form.age === "" || ageNum < 18 || ageNum > 100) {
       newErrors.age = "อายุต้องอยู่ระหว่าง 18–100"
@@ -30,8 +31,12 @@ function RegisterForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    console.log(form)
     if (validate()) {
       console.log("สมัครสำเร็จ:", form)
+      alert("สมัครสมาชิกสำเร็จ!")
+      setForm({ name: "", email: "", age: "", phone: "" })
+      setErrors({})
     }
   }
 
@@ -43,17 +48,20 @@ function RegisterForm() {
         className="w-full border rounded px-3 py-2" />
       {errors.name && <p className="text-red-600 text-sm">{errors.name}</p>}
 
-      <input value={form.email} onChange={e => updateField("email", e.target.value)} placeholder="อีเมล"
+      <input type="email" value={form.email} onChange={e => updateField("email", e.target.value)} placeholder="อีเมล"
         className="w-full border rounded px-3 py-2" />
       {errors.email && <p className="text-red-600 text-sm">{errors.email}</p>}
 
-      <input value={form.age} onChange={e => updateField("age", e.target.value)} placeholder="อายุ"
+      <input type="number" inputMode="numeric" max={100} min={18} value={form.age} onChange={e => updateField("age", e.target.value)} placeholder="อายุ"
         className="w-full border rounded px-3 py-2" />
       {errors.age && <p className="text-red-600 text-sm">{errors.age}</p>}
 
       {/* TODO B1: เพิ่ม input เบอร์โทร ผูกกับ form.phone + errors.phone ตรงนี้ */}
+      <input type="tel" inputMode="numeric" maxLength={10} value={form.phone} onChange={e => updateField("phone", e.target.value)} placeholder="เบอร์โทร"
+        className="w-full border rounded px-3 py-2" />
+      {errors.phone && <p className="text-red-600 text-sm">{errors.phone}</p>}
 
-      <button type="submit" className="w-full py-2 rounded bg-blue-600 text-white">
+      <button type="submit" className="w-full py-2 rounded bg-blue-600 text-white" disabled={Object.values(errors).some(Boolean)}>
         สมัคร
       </button>
     </form>
