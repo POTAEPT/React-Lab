@@ -58,6 +58,9 @@ function App() {
   if (error) {
     return <p className="p-6 text-red-600">{error}</p>
   }
+  if (users.length === 0){
+    return <p className="p-6">ไม่พบข้อมูลผู้ใช้</p>
+  }
 
 
 
