@@ -11,6 +11,8 @@
 
 ---
 
+
+
 ## เริ่มยังไง
 
 ```bash
@@ -18,13 +20,17 @@ npm install     # ครั้งแรกครั้งเดียว (ถ้
 npm run dev     # เปิด http://localhost:5173
 ```
 
-| ปัญหา | ทางแก้ |
-|---|---|
-| port 5173 ชนกับคนข้าง ๆ | `Ctrl+C` แล้ว `npm run dev -- --port 5174` |
-| Tailwind ไม่ทำงาน (กล่องไม่มีขอบมน/ไม่มีเงา) | เช็ก `src/index.css` มี `@import "tailwindcss";` + `vite.config.js` มี `tailwindcss()` แล้ว **restart `npm run dev`** (ไฟล์ config ไม่ hot-reload) |
-| จอขาว | เปิด Console — ดูว่า `useState`/`useEffect` ถูก `import` ครบไหม |
+
+| ปัญหา                                        | ทางแก้                                                                                                                                             |
+| -------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| port 5173 ชนกับคนข้าง ๆ                      | `Ctrl+C` แล้ว `npm run dev -- --port 5174`                                                                                                         |
+| Tailwind ไม่ทำงาน (กล่องไม่มีขอบมน/ไม่มีเงา) | เช็ก `src/index.css` มี `@import "tailwindcss";` + `vite.config.js` มี `tailwindcss()` แล้ว **restart** `npm run dev` (ไฟล์ config ไม่ hot-reload) |
+| จอขาว                                        | เปิด Console — ดูว่า `useState`/`useEffect` ถูก `import` ครบไหม                                                                                    |
+
 
 ---
+
+
 
 ## ⚠️ GitHub REST API — rate limit ของ Lab B
 
@@ -34,6 +40,8 @@ npm run dev     # เปิด http://localhost:5173
 
 ---
 
+
+
 ## 🚫 AI Policy วันนี้ — วันสุดท้ายของ 3 วันที่ห้าม
 
 **ห้ามใช้ AI generate โค้ดเด็ดขาด** ระหว่างแล็บ — ChatGPT, Copilot, Claude หรือเครื่องมือใดก็ตาม
@@ -41,19 +49,25 @@ npm run dev     # เปิด http://localhost:5173
 
 ---
 
+
+
 ## เกณฑ์ให้คะแนนวันนี้
 
 **Lab A (pass/fail — ต้องผ่านครบทุกข้อ = ได้เต็ม 60% ของวันนี้ ไม่ผ่านแม้ข้อเดียว = 0)**
+
 - [ ] list render ด้วย `.map()` มี `key` ที่ไม่ใช่ index (ยกเว้นอธิบายเหตุผลได้)
 - [ ] search + filter ทำงานถูกต้องตามโจทย์
 - [ ] มี empty state เมื่อไม่พบผลลัพธ์
 
 **Lab B (คุณภาพ — คิดเป็นสัดส่วนใน 40% ที่เหลือของวันนี้)**
+
 - เปลี่ยนเป็น API จริงพร้อม 3 สถานะครบ (loading/error/empty) — **40%**
 - แยก fetch logic เป็น custom hook `useFetch` ที่ reusable จริง — **40%**
 - จัดการ cleanup/stale response เบื้องต้น — **20%**
 
 ---
+
+
 
 ## ไฟล์ที่ต้องเขียน
 
@@ -68,6 +82,8 @@ src/
     └── useFetch.js            ← Lab B — สร้างไฟล์นี้เอง (โฟลเดอร์เตรียมว่างไว้ให้แล้ว)
 ```
 
+
+
 ### Lab A (13:00–13:55) — เช็กก่อนส่ง
 
 - [ ] แสดงเป็น **grid** (มือถือ 1 คอลัมน์ · จอใหญ่ 3–4 คอลัมน์) — การ์ดละ avatar + login + bio + follower count
@@ -75,8 +91,10 @@ src/
 - [ ] **filter ตาม "ผู้ติดตามขั้นต่ำ"** (number input สร้างจากค่าจริง ไม่ hardcode ช่วง)
 - [ ] **นับ "พบ X รายการ"** ต้องตรงกับจำนวนการ์ดจริง
 - [ ] 🔴 **empty state + ปุ่มล้างตัวกรอง**
-- [ ] 🔴 **3 คนที่ไม่มี `followers` ต้องไม่ขึ้น `NaN`/`undefined`** (แสดง "ยังไม่ทราบจำนวนผู้ติดตาม")
-- [ ] 🔴 **แคปหน้าจอบั๊ก `key={index}` ก่อน/หลังแก้ ใส่ `README.md`** — ตามที่สาธิตสดตอนเลกเชอร์ (บล็อก 1.2) TA จะขอดูก่อนให้ผ่านข้อ `key`
+- [ ] 🔴 **3 คนที่ไม่มี** `followers` **ต้องไม่ขึ้น** `NaN`**/**`undefined` (แสดง "ยังไม่ทราบจำนวนผู้ติดตาม")
+- [ ] 🔴 **แคปหน้าจอบั๊ก** `key={index}` **ก่อน/หลังแก้ ใส่** `README.md` — ตามที่สาธิตสดตอนเลกเชอร์ (บล็อก 1.2) TA จะขอดูก่อนให้ผ่านข้อ `key`
+
+
 
 ### Lab B (14:00–14:50) — เช็กก่อนส่ง
 
@@ -100,9 +118,8 @@ GET /users?followers_lte=20000    # 20k or under
 GET /users?followers_gte=20000&followers_lte=100000   # range
 GET /users?_sort=followers&_order=desc   # sort by followers, highest first
 
-
 Backend API URL 
-https://mock-server-xi-one.vercel.app
+[https://mock-server-xi-one.vercel.app](https://mock-server-xi-one.vercel.app)
 
 combine
 /users?login_like=oct&followers_gte=50000
@@ -110,3 +127,4 @@ combine
 ## สมาชิกกลุ่ม
 
 > TODO: ชื่อ–รหัส 2 คน
+

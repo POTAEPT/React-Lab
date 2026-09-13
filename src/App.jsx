@@ -1,6 +1,7 @@
 // import { users as ALL_USERS} from './data/users.js'
 import {useState, useEffect} from 'react'
 import UserCard from './components/UserCard.jsx'
+import useFetch from './hooks/useFetch.js'
 
 // TODO Lab A: filter ALL_USERS ตาม query + minFollowers (คำนวณสดตอน render — ห้ามเก็บเป็น state)
 // TODO Lab A: import และใช้ FilterBar.jsx + UserCard.jsx (เขียนเองก่อน — ตอนนี้ยังว่างอยู่)
@@ -10,9 +11,8 @@ const API_URL = 'https://mock-server-xi-one.vercel.app/users'
 
 function App() {
 
-  const [users, setUsers] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState('')
+  const { data, loading, error } = useFetch(API_URL);
+  const [users, setUsers] = useState(data || [])
 
   useEffect(() => {
     const controller = new AbortController()
