@@ -28,16 +28,14 @@ function App() {
   const [userFollowers, setUserFollowers] = useState(0)
   const [searchQuery, setSearchQuery] = useState('')
   const [searchFollowers, setSearchFollowers] = useState(0)
-  const [hasSearched, setHasSearched] = useState(false)
 
-  const url = hasSearched ? buildUsersUrl(searchQuery, searchFollowers) : null
+  const url = buildUsersUrl(searchQuery, searchFollowers)
   const { data, loading, error, refetch } = useUserFetch(url)
   const users = data ?? []
 
   function handleSearch() {
     setSearchQuery(query)
     setSearchFollowers(userFollowers)
-    setHasSearched(true)
   }
 
   function handleClear() {
@@ -45,7 +43,6 @@ function App() {
     setUserFollowers(0)
     setSearchQuery('')
     setSearchFollowers(0)
-    setHasSearched(false)
   }
 
   return (
@@ -60,7 +57,7 @@ function App() {
         onClear={handleClear}
       />
 
-      {hasSearched && !loading && !error && (
+      {!loading && !error && (
         <p className="mb-4 text-sm text-slate-600">
           พบ {users.length} รายการ
         </p>
@@ -81,16 +78,7 @@ function App() {
         </div>
       )}
 
-      {!hasSearched && !loading && !error && (
-        <div className="rounded-xl border border-dashed border-slate-300 px-6 py-12 text-center">
-          <p className="text-lg font-medium text-slate-800">ยังไม่ได้ค้นหา</p>
-          <p className="mt-2 text-sm text-slate-500">
-            กรอกเงื่อนไขแล้วกด Search เพื่อโหลดข้อมูล
-          </p>
-        </div>
-      )}
-
-      {hasSearched && !loading && !error && users.length === 0 && (
+      {!loading && !error && users.length === 0 && (
         <div className="rounded-xl border border-dashed border-slate-300 px-6 py-12 text-center">
           <p className="text-lg font-medium text-slate-800">ไม่พบผู้ใช้ที่ตรงกับเงื่อนไข</p>
           <p className="mt-2 text-sm text-slate-500">
@@ -106,7 +94,7 @@ function App() {
         </div>
       )}
 
-      {hasSearched && !loading && !error && users.length > 0 && (
+      {!loading && !error && users.length > 0 && (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {users.map((user) => (
             <UserCard key={user.id} user={user} />
