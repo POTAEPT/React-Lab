@@ -1,1 +1,17 @@
 // ว่างไว้ตั้งใจ — Lab A: Nav + <Outlet /> + footer (เขียน nav ที่นี่ที่เดียว ห้าม copy ไปทุกหน้า)
+import Nav from "./Nav";
+import { Outlet } from "react-router-dom";
+
+function Layout() {
+  return (
+    <div className="min-h-screen flex flex-col">
+      <Nav />
+      <main className="flex-1 p-6">
+        <Outlet />
+      </main>
+      <footer className="p-4 border-t text-sm">© 2026 DII CAMT</footer>
+    </div>
+  );
+}
+
+export default Layout;
