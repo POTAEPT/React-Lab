@@ -27,16 +27,16 @@ function Recipes() {
       />
       {loading && <p className="mt-4">กำลังโหลด...</p>}
       {error && <p className="mt-4">เกิดข้อผิดพลาด: {error}</p>}
-      <ul className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
+      <ul className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4 ">
         {meals.map((meal) => (
-          <li key={meal.idMeal}>
+          <li key={meal.idMeal} className="border rounded-xl overflow-hidden">
             <Link to={`/recipes/${meal.idMeal}`}>
               <img
                 src={meal.strMealThumb}
                 alt={meal.strMeal}
-                className="rounded"
+                className="rounded-t-lg h-48 w-full object-cover"
               />
-              <p>{meal.strMeal}</p>
+              <p className="h-10 text-center">{meal.strMeal}</p>
             </Link>
           </li>
         ))}
