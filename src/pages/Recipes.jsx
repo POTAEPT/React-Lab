@@ -1,11 +1,27 @@
 // ว่างไว้ตั้งใจ — Lab A: การ์ดจาก filter.php?c=Dessert + 3 สถานะ · Lab B (B2): ค้นหาด้วย useSearchParams
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useFetch } from "../hooks/useFetch.js";
 import { Link, useSearchParams } from "react-router-dom";
 
 function Recipes() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const q = searchParams.get("q");
+  const q = searchParams.get("q") ?? "";
+  const [input, setInput] = useState(q);
+
+
+  useEffect(() => {
+    setInput(q);
+  }, [q]);
+
+  useEffect(() => {
+    const id = setTimeout(() => {
+      const next = input.trim();
+      if (next !== q) {
+        setSearchParams(next ? { q: next } : {});
+      }
+    }, 300);
+    return () => clearTimeout(id);
+  }, [input, q, setSearchParams]);
 
   const { data, loading, error } = useFetch(
     q
