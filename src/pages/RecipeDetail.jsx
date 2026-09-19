@@ -4,9 +4,7 @@ import { useFetch } from "../hooks/useFetch.js";
 
 function RecipeDetail() {
   const param = useParams();
-  const { id } = param; // ⌨️ พิมพ์ตาม #4 (2.1): เปลี่ยนเป็น const { id } = useParams()
-  // ⌨️ พิมพ์ตาม #6 (2.3): const navigate = useNavigate()
-
+  const { id } = param;
   const navigate = useNavigate();
   const { data, loading, error } = useFetch(
     `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`,
@@ -19,17 +17,17 @@ function RecipeDetail() {
     const json = await res.json();
     const newId = json.meals[0].idMeal;
     console.log("สุ่มได้", newId);
-    navigate(`/recipes/${newId}`); // ⌨️ พิมพ์ตาม #6 (2.3): เปลี่ยนเป็น navigate(`/recipes/${newId}`)
+    navigate(`/recipes/${newId}`);
   }
 
   if (loading) return <p>กำลังโหลด...</p>;
   if (error) return <p>{error}</p>;
 
-  const meal = data?.meals?.[0]; // ⚠️ TheMealDB คืน 3 ชั้น
+  const meal = data?.meals?.[0];
   if (!meal)
     return (
       <div>
-        <p>ไม่พบเมนูนี้</p>
+        <p>ไม่พบเมนูนี้ Id : {id}</p>
         <Link to="/recipes">← กลับไปหน้ารายการ</Link>
       </div>
     );

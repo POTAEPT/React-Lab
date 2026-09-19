@@ -2,7 +2,7 @@
 import { NavLink } from 'react-router-dom'
 
 const linkClass = ({ isActive }) =>
-  isActive ? "font-bold text-blue-600 underline" : "text-gray-600"
+  isActive ? "font-bold text-orange-600 underline" : "text-gray-600"
 
 function Nav() {
   return (

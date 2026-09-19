@@ -42,9 +42,9 @@ Lab B  ค้นหา:      https://www.themealdb.com/api/json/v1/1/search.php?
 ## เกณฑ์ให้คะแนนวันนี้
 
 **Lab A (pass/fail — ผ่านครบทุกข้อ = 60% · ไม่ผ่านแม้ข้อเดียว = 0)**
-- [ ] มี layout route ที่ nav ใช้ร่วมกันทุกหน้าจริง (ไม่ copy nav ซ้ำ)
-- [ ] เปลี่ยนหน้าแบบ SPA ไม่ reload ทั้งหน้า
-- [ ] มี 404 route ที่ทำงานจริง
+- [x] มี layout route ที่ nav ใช้ร่วมกันทุกหน้าจริง (ไม่ copy nav ซ้ำ)
+- [x] เปลี่ยนหน้าแบบ SPA ไม่ reload ทั้งหน้า
+- [x] มี 404 route ที่ทำงานจริง
 
 **Lab B (คุณภาพ — 40%)**
 - dynamic route `:id` ดึงข้อมูลตรงตาม id ถูกต้อง — **40%**
