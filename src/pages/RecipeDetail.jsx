@@ -27,7 +27,7 @@ function RecipeDetail() {
   if (!meal)
     return (
       <div>
-        <p>ไม่พบเมนูนี้</p>
+        <p>ไม่พบเมนูนี้ Id : {id}</p>
         <Link to="/recipes">← กลับไปหน้ารายการ</Link>
       </div>
     );
