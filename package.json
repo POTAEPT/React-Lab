@@ -1,5 +1,5 @@
 {
-  "name": "lab-day-03-start",
+  "name": "lab-day-04-start",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -12,6 +12,7 @@
     "@tailwindcss/vite": "^4.3.3",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
+    "react-router-dom": "^7.18.3",
     "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
