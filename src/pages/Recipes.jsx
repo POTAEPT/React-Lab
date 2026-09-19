@@ -34,9 +34,9 @@ function Recipes() {
   return (
     <>
       <input
-        value={q}
+        value={input}
         onChange={(e) =>
-          setSearchParams(e.target.value ? { q: e.target.value } : {})
+          setInput(e.target.value)
         }
         placeholder="ค้นหาเมนู"
         className="border p-2 rounded w-full"
