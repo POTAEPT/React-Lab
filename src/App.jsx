@@ -3,6 +3,8 @@ import { Routes, Route } from 'react-router-dom'
 import Header from './components/Header.jsx'
 import BookingPage from './components/BookingPage.jsx'
 import { MAX_HOURS, dayOf } from './data/rooms.js'
+// import Summary from './pages/Summary.jsx'
+import Confirm from './pages/Confirm.jsx'
 
 // 💥 starter: state อยู่ที่ App แล้วส่ง props ลง 4 ชั้น (prop drilling โดยจงใจ)
 //    App → BookingPage → WeekGrid → DayColumn → SlotButton  (3 ชั้นกลางไม่ได้ใช้เอง แค่ส่งต่อ)
@@ -26,6 +28,8 @@ function App() {
       <main className="mx-auto max-w-4xl p-6">
         <Routes>
           <Route path="/" element={<BookingPage slots={slots} toggle={toggle} />} />
+          {/* <Route path="/summary" element={<Summary />} /> */}
+          <Route path="/confirm" element={<Confirm />} />
           {/* TODO Lab A ขั้น 4: <Route path="/summary" element={<Summary />} /> */}
           {/* TODO Lab B:        <Route path="/confirm" element={<Confirm />} /> */}
         </Routes>
