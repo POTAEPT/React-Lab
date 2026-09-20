@@ -1,8 +1,8 @@
 import { BOOKED, MAX_HOURS, dayOf, slotId } from '../data/rooms.js'
+import { useBooking } from '../context/BookingContext.jsx'
 
-// คนที่ใช้ค่าจริง — อยู่ลึกสุด 4 ชั้นจาก App
-// TODO Lab A ขั้น 3: เลิกรับ props แล้วเรียก useBooking() เอง
-function SlotButton({ dayCode, hour, slots, toggle }) {
+function SlotButton({ dayCode, hour }) {
+  const { slots, toggle } = useBooking()
   const id = slotId(dayCode, hour)
   const picked = slots.includes(id)
   const takenByOthers = BOOKED.includes(id)
