@@ -2,6 +2,8 @@ import { Routes, Route } from 'react-router-dom'
 import Header from './components/Header.jsx'
 import BookingPage from './components/BookingPage.jsx'
 
+import Summary from './pages/Summary.jsx'
+
 function App() {
   return (
     <>
@@ -10,6 +12,7 @@ function App() {
         <Routes>
           <Route path="/" element={<BookingPage />} />
           {/* TODO Lab A ขั้น 4: <Route path="/summary" element={<Summary />} /> */}
+          <Route path="/summary" element={<Summary />} />
           {/* TODO Lab B:        <Route path="/confirm" element={<Confirm />} /> */}
         </Routes>
       </main>
