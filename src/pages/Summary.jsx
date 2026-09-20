@@ -1,5 +1,4 @@
 // ว่างไว้ตั้งใจ — Lab A ขั้น 4: สรุปช่องที่เลือก · ลบทีละช่อง · ล้างทั้งหมด · รวมกี่ชั่วโมง
-// ว่างไว้ตั้งใจ — Lab A ขั้น 4: สรุปช่องที่เลือก · ลบทีละช่อง · ล้างทั้งหมด · รวมกี่ชั่วโมง
 import { Link } from 'react-router-dom'
 import { useBooking } from '../context/BookingContext.jsx'
 import { MAX_HOURS, slotLabel } from '../data/rooms.js'

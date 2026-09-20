@@ -12,4 +12,5 @@ export const bookingSchema = z
   })
   .refine((data) => data.email === data.confirmEmail, {
     message: "อีเมลไม่ตรงกัน",
+    path: ["confirmEmail"],
   });

@@ -23,6 +23,7 @@ function Confirm() {
       onSubmit={handleSubmit(onSubmit)}
       className="mx-auto mb-8 max-w-4xl rounded-lg border bg-white p-6 shadow-sm"
     >
+        <h1>ยืนยันการจอง</h1>
       
       <label className="mb-2 block">
         <span className="text-sm font-medium">ชื่อผู้จอง</span>
@@ -78,6 +79,7 @@ function Confirm() {
       {errors.purpose && <p className="text-red-500 text-sm mb-4">{errors.purpose.message}</p>}
 
       <button 
+        to="/summary"
         type="submit"
         className="w-full mt-6 rounded bg-blue-600 py-3 text-center font-semibold text-white block"
       >
