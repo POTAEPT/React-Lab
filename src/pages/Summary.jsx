@@ -4,7 +4,8 @@ import { useBooking } from '../context/BookingContext.jsx'
 import { MAX_HOURS, slotLabel } from '../data/rooms.js'
 
 function Summary() {
-    const { slots, removeSlot, clearSlots, totalHours } = useBooking()
+    const { slots, remove: removeSlot, clear: clearSlots, total: totalHours } = useBooking()
+
 
     if (slots.length === 0) {
         return (

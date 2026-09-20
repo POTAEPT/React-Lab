@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useBooking } from '../context/BookingContext.jsx'
+import { MAX_HOURS } from '../data/rooms.js'
 
 function Header() {
   const { slots } = useBooking()
@@ -10,7 +11,7 @@ function Header() {
         🏢 จองห้องประชุม
       </Link>
       <Link to="/summary" className="text-sm text-blue-600 hover:underline">
-        ดูรายการที่เลือก ({slots.length} ชม.)
+        จองแล้ว {slots.length} ชม. / สูงสุด {MAX_HOURS} ชม.
       </Link>
     </header>
   )

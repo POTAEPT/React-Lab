@@ -60,8 +60,8 @@ src/
 
 **Lab A (pass/fail — ผ่านครบทุกข้อ = 60% · ไม่ผ่านแม้ข้อเดียว = 0)**
 
-- [ ] ไม่มี prop drilling เหลือในจุดที่โจทย์กำหนด (ใช้ Context แทนแล้ว)
-- [ ] custom hook `useBooking()` ห่อ context logic ไว้ ไม่เรียก `useContext` ตรง ๆ ใน component
+- [x] ไม่มี prop drilling เหลือในจุดที่โจทย์กำหนด (ใช้ Context แทนแล้ว)
+- [x] custom hook `useBooking()` ห่อ context logic ไว้ ไม่เรียก `useContext` ตรง ๆ ใน component
 - [ ] เลือก/ยกเลิก/ล้างช่วงเวลาทำงานถูกต้องตามกติกาของห้องครบทุกข้อ
 
 **Lab B (คุณภาพ — 40%)**
