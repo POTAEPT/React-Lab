@@ -1,16 +1,23 @@
-# `lab-day-04-start` — โปรเจกต์ตั้งต้นของแล็บบ่าย วันที่ 4
+# `lab-day-05-start` — โปรเจกต์ตั้งต้นของแล็บบ่าย วันที่ 5
 
-โครงตั้งต้นสำหรับ **Lab วันที่ 4 — 🎯 มินิแอป #2: Recipe Browser (React Router)** (13:00–15:00)
-โจทย์เต็มอยู่ที่ `labs/day-04.md` — ไฟล์นี้คือ**ที่ที่ต้องเขียนโค้ดและส่งงาน** · หน้าตาเป้าหมายดู `mockup-recipe-browser.png`
+โครงตั้งต้นสำหรับ **Lab วันที่ 5 — 🎯 มินิแอป #3: ระบบจองห้องประชุม**
+⏱ **Lab A 13:00–13:55 · Lab B 14:00–14:50 · Explain-Back 14:50–15:00**
+โจทย์เต็มอยู่ที่ `labs/day-05.md` · หน้าตาเป้าหมายเปิด `mockup-room-booking.html` ในเบราว์เซอร์ (ดูแค่หน้าตา ไม่ต้องลอกโค้ด)
 
-> 🎯 **มินิแอปหมุดหมายชิ้นที่ 2 จาก 5** — คะแนนแล็บวันนี้คูณ **×1.5**
-> 🔓 **ใช้ AI ช่วยได้แล้ว** — แต่ต้องอธิบายได้ว่าใช้ตรงไหน ถามอะไร เมื่อ TA ถาม
-> ⚠️ **ไม่มี deploy วันนี้** — ย้ายไปวันที่ 8
+> 🎯 **มินิแอปหมุดหมายชิ้นที่ 3 จาก 5** — คะแนนแล็บวันนี้คูณ **×1.5**
+> 📣 **Assignment 1 (React SPA) แจกเช้านี้** — ส่งเสาร์ 26 ก.ย. 69 ก่อน 09:00 · โครงตั้งต้นอยู่ที่ `assignment-01-start/`
+> 🔴 **โจทย์บ่ายนี้ไม่ใช่ตะกร้าสินค้าของเช้า** — กติกาต่างกันคนละเรื่อง โดยเฉพาะ **กดช่องเดิมซ้ำ = ยกเลิก ไม่ใช่เพิ่มจำนวน** · ก็อป `CartContext.jsx` จากตอนเช้ามาวางแล้วพังแน่นอน
 
-ต่อ Vite + React 19 + Tailwind CSS v4 + `react-router-dom` ไว้ให้แล้ว
-`src/hooks/useFetch.js` **มีให้แล้ว** (ของวันที่ 3) · ไฟล์ใน `src/components/` และ `src/pages/` **ว่างไว้ตั้งใจ** — มีแค่คอมเมนต์บอกว่าต้องเขียนอะไร
+## โจทย์ย่อ
 
----
+จองห้องประชุม 1 ห้อง ตารางทั้งสัปดาห์ จันทร์–ศุกร์ ช่องละ 1 ชั่วโมง (09:00–17:00 เว้นพักเที่ยง)
+
+**กติกาของห้อง** (อยู่ใน `src/data/rooms.js` แล้ว)
+
+- จองได้ครั้งละ **ไม่เกิน 4 ชั่วโมง**
+- ทุกช่องที่เลือก **ต้องเป็นวันเดียวกัน** — เลือกวันจันทร์แล้วกดวันพุธไม่ได้
+- ช่องที่ฝ่ายอื่นจองไปแล้ว (`BOOKED`) กดไม่ได้ และต้องบอกเหตุผล
+- **กดช่องที่เลือกไว้แล้วซ้ำ = ยกเลิกช่องนั้น**
 
 ## เริ่มยังไง
 
@@ -19,62 +26,141 @@ npm install
 npm run dev     # http://localhost:5173
 ```
 
-| ปัญหา | ทางแก้ |
-|---|---|
-| จอขาว `useRoutes() may be used only in the context of a <Router>` | ลืม `<BrowserRouter>` ที่ `main.jsx` |
-| หน้าว่าง/`does not provide an export named 'default'` | ไฟล์หน้านั้นยังว่างอยู่ — เขียน component + `export default` ก่อน import |
-| port 5173 ชนกับคนข้าง ๆ | `npm run dev -- --port 5174` |
-
----
-
-## API — TheMealDB (ฟรี ไม่ต้องใช้ key)
+starter รันได้ทันที — ตารางเลือกเวลาทำงานอยู่แล้ว แต่ **state อยู่ที่ `App.jsx` และส่ง props ลง 4 ชั้นโดยจงใจ**
 
 ```
-Lab A  รายการ:     https://www.themealdb.com/api/json/v1/1/filter.php?c=Dessert
-Lab B  รายละเอียด:  https://www.themealdb.com/api/json/v1/1/lookup.php?i=52772
-Lab B  ค้นหา:      https://www.themealdb.com/api/json/v1/1/search.php?s=chicken
+App (state slots อยู่ที่นี่)
+ ├── Header               ← ต้องรู้จำนวนชั่วโมงรวม — คนละกิ่งกับ BookingPage
+ └── BookingPage          ← ส่งต่อเฉย ๆ
+      └── WeekGrid            ← ส่งต่อเฉย ๆ
+           └── DayColumn          ← ส่งต่อเฉย ๆ
+                └── SlotButton        ← คนใช้จริง
 ```
-
-⚠️ หาไม่เจอจะได้ `{ "meals": null }` + HTTP 200 — **ไม่ใช่ 404**
-
----
-
-## เกณฑ์ให้คะแนนวันนี้
-
-**Lab A (pass/fail — ผ่านครบทุกข้อ = 60% · ไม่ผ่านแม้ข้อเดียว = 0)**
-- [x] มี layout route ที่ nav ใช้ร่วมกันทุกหน้าจริง (ไม่ copy nav ซ้ำ)
-- [x] เปลี่ยนหน้าแบบ SPA ไม่ reload ทั้งหน้า
-- [x] มี 404 route ที่ทำงานจริง
-
-**Lab B (คุณภาพ — 40%)**
-- dynamic route `:id` ดึงข้อมูลตรงตาม id ถูกต้อง — **40%**
-- query string search sync กับ UI สองทาง — **40%**
-- จัดการกรณี id ไม่มีอยู่จริง (not found) — **20%**
-
----
 
 ## ไฟล์ที่ต้องเขียน
 
 ```
 src/
-├── main.jsx                  ← Lab A: ครอบ <BrowserRouter>
-├── App.jsx                   ← Lab A: <Routes> nested ใต้ Layout · Lab B: เพิ่ม recipes/:id
+├── main.jsx                    ← Lab A ขั้น 2: ครอบ <BookingProvider>
+├── App.jsx                     ← Lab A: ลบ state/props · เพิ่ม route /summary /confirm
+├── context/BookingContext.jsx  ← Lab A: ว่าง — BookingProvider + useBooking() + guard + กฎทั้ง 4 ข้อ
 ├── components/
-│   ├── Layout.jsx            ← Lab A: Nav + <Outlet /> + footer
-│   └── Nav.jsx               ← Lab A: NavLink 3 อัน (+ end ที่หน้าแรก)
-├── pages/
-│   ├── Home.jsx              ← Lab A
-│   ├── Recipes.jsx           ← Lab A: list + 3 สถานะ · Lab B (B2): useSearchParams
-│   ├── RecipeDetail.jsx      ← Lab B (B1): useParams + ไม่พบสูตร
-│   ├── About.jsx             ← Lab A
-│   └── NotFound.jsx          ← Lab A
-└── hooks/
-    └── useFetch.js           ← มีให้แล้ว ใช้ต่อได้เลย
+│   ├── Header.jsx              ← Lab A: ใช้ useBooking() ไม่รับ prop
+│   ├── BookingPage.jsx         ← Lab A: ลบ props
+│   ├── WeekGrid.jsx            ← Lab A: ลบ props
+│   ├── DayColumn.jsx           ← Lab A: ลบ props (เหลือ day ที่เป็นของตัวเอง)
+│   └── SlotButton.jsx          ← Lab A: เรียก useBooking() เอง
+├── pages/Summary.jsx           ← Lab A ขั้น 4: ว่าง — สรุป/ลบทีละช่อง/ล้างทั้งหมด
+├── pages/Confirm.jsx           ← Lab B: ว่าง — react-hook-form + zodResolver
+├── schemas/booking.js          ← Lab B ขั้น 1: ว่าง — 5 ช่อง
+└── data/rooms.js               ← ✅ ให้มาแล้ว: DAYS, HOURS, MAX_HOURS, BOOKED, DEPARTMENTS, slotId(), dayOf(), slotLabel()
 ```
 
-### ก่อนส่ง — Twist ที่ TA จะลองกับเครื่องคุณ
+## เกณฑ์ให้คะแนนวันนี้
 
-- [ ] copy `/recipes?q=chicken` ไปเปิดแท็บใหม่ → ช่องค้นหาขึ้น "chicken" + ผลลัพธ์ตรงทันที
-- [ ] พิมพ์ค้นหาแล้วกด back → กลับหน้าก่อนค้นหา **ไม่ย้อนทีละตัวอักษร**
-- [ ] พิมพ์ `/recipes/52772` ตรง ๆ ในแถบที่อยู่ → ได้หน้าเดิมเป๊ะ
-- [ ] `/recipes/99999` → "ไม่พบสูตรนี้" ไม่ใช่จอขาว
+**Lab A (pass/fail — ผ่านครบทุกข้อ = 60% · ไม่ผ่านแม้ข้อเดียว = 0)**
+
+- [ ] ไม่มี prop drilling เหลือในจุดที่โจทย์กำหนด (ใช้ Context แทนแล้ว)
+- [ ] custom hook `useBooking()` ห่อ context logic ไว้ ไม่เรียก `useContext` ตรง ๆ ใน component
+- [ ] เลือก/ยกเลิก/ล้างช่วงเวลาทำงานถูกต้องตามกติกาของห้องครบทุกข้อ
+
+**Lab B (คุณภาพ — 40%)**
+
+- validate ด้วย zod ครบทุก field ที่กำหนด พร้อม error message ถูกต้อง — **50%**
+- UX ของ validation เหมาะสม (mode ไม่ก่อกวนผู้ใช้) — **25%**
+- อธิบายได้ว่าทำไมเลือก Context ไม่ใช่ Redux/Zustand ในสถานการณ์นี้ — **25%**
+
+> คะแนนรวมของวันนี้คูณ **×1.5** หลังรวม Lab A + Lab B แล้ว (วันหมุดหมาย)
+
+## ก่อนส่ง — Twist ที่ TA จะเช็ก
+
+- [ ] `grep -rn "useContext(BookingContext)" src/` เจอแค่บรรทัดเดียวใน `BookingContext.jsx`
+- [ ] `useBooking()` นอก Provider → `useBooking must be used within BookingProvider`
+- [ ] กดช่องเดิมซ้ำ → **ยกเลิก** ไม่ใช่เพิ่มซ้ำ
+- [ ] เลือกวันจันทร์แล้วกดวันพุธ → กดไม่ได้ พร้อมบอกเหตุผล
+- [ ] เลือกครบ 4 ชม. แล้วกดช่องที่ 5 → กดไม่ได้ แต่ยัง**ยกเลิกช่องที่เลือกไว้ได้**
+- [ ] ยังไม่เลือกเวลาแล้วเข้า `/confirm` ตรง ๆ → ไม่ให้กรอกฟอร์ม
+- [ ] ไม่เลือกแผนก แล้วกดส่ง → error ใต้ช่องแผนก
+- [ ] README ตอบครบ 3 ข้อ
+
+### แบบฟอร์ม (ก็อปไปใช้ได้เลย)
+
+```markdown
+# Final Project Proposal — [ชื่อแอป]
+
+กลุ่ม: [ชื่อกลุ่ม] · สมาชิก: [ชื่อ-รหัส] , [ชื่อ-รหัส]
+
+## 1. แอปนี้ทำอะไร ใครใช้
+
+[ 2–3 บรรทัด: แก้ปัญหาอะไรให้ใคร ]
+
+## 2. หน้าที่จะมี (อย่างน้อย 4 route)
+
+| Route | หน้านี้ทำอะไร |
+| ----- | ------------- |
+| /     |               |
+|       |               |
+
+## 3. Server หรือ Client — และทำไม
+
+| ส่วนของแอป | Server / Client | เหตุผล |
+| ---------- | --------------- | ------ |
+|            |                 |        |
+
+## 4. ข้อมูลมาจากไหน + จุดที่ต้องเขียนข้อมูลกลับ
+
+- แหล่งข้อมูล:
+- mutation (Server Action / Route Handler) ที่จุดไหน:
+
+## 5. แบ่งงานกันยังไง
+
+- [ชื่อ A]:
+- [ชื่อ B]:
+```
+
+### ตัวอย่างที่กรอกแล้ว (ใช้เป็นมาตรฐานความละเอียดที่ต้องการ)
+
+```markdown
+# Final Project Proposal — CAMT Secondhand
+
+กลุ่ม: Team Ratchet · สมาชิก: สมชาย ใจดี 65xxxxxxx , มานี รักเรียน 65xxxxxxx
+
+## 1. แอปนี้ทำอะไร ใครใช้
+
+ตลาดนัดมือสองสำหรับนักศึกษา CAMT — ลงประกาศขายของที่ไม่ใช้แล้ว (หนังสือ เสื้อช็อป
+อุปกรณ์) และค้นหาของที่อยากได้ ปัจจุบันซื้อขายกันในกลุ่ม Facebook ซึ่งของเก่าจมหาย
+ไม่มีหมวดหมู่ ค้นย้อนหลังไม่ได้
+
+## 2. หน้าที่จะมี (อย่างน้อย 4 route)
+
+| Route       | หน้านี้ทำอะไร                                                |
+| ----------- | ------------------------------------------------------------ |
+| /           | หน้าแรก — ของมาใหม่ 8 ชิ้น + ลิงก์เข้าหมวดหมู่               |
+| /items      | รายการสินค้าทั้งหมด + ค้นหา + กรองตามหมวด (คำค้นอยู่ใน URL)  |
+| /items/[id] | รายละเอียดสินค้า + ปุ่มติดต่อผู้ขาย + ปุ่มเก็บเข้ารายการโปรด |
+| /sell       | ฟอร์มลงประกาศขาย (ชื่อ ราคา หมวด รูป เบอร์ติดต่อ)            |
+| /favorites  | รายการโปรดของฉัน (เก็บฝั่ง client)                           |
+
+## 3. Server หรือ Client — และทำไม
+
+| ส่วนของแอป                | Server / Client | เหตุผล                                                                  |
+| ------------------------- | --------------- | ----------------------------------------------------------------------- |
+| /items รายการสินค้า       | Server          | ดึงจาก DB ตรง ๆ ไม่ต้องส่ง JS ไปให้ client และอยากให้ Google เห็นสินค้า |
+| /items/[id] รายละเอียด    | Server          | เหมือนกัน + ข้อมูลไม่เปลี่ยนบ่อย                                        |
+| ช่องค้นหา + dropdown หมวด | Client          | ต้อง onChange และอ่าน/เขียน URL ผ่าน useSearchParams                    |
+| ปุ่ม "เก็บเข้ารายการโปรด" | Client          | ต้องกดแล้วเปลี่ยนทันที + อ่าน localStorage                              |
+| ฟอร์ม /sell               | Client          | react-hook-form ต้องใช้ state และ event                                 |
+| ตัวบันทึกประกาศลง DB      | Server Action   | โค้ดที่แตะฐานข้อมูลต้องไม่หลุดไปฝั่ง browser                            |
+| layout + nav              | Server          | ไม่มี interactive ใน layout เอง                                         |
+
+## 4. ข้อมูลมาจากไหน + จุดที่ต้องเขียนข้อมูลกลับ
+
+- แหล่งข้อมูล: Supabase (ตาราง items) — ถ้าตั้งไม่ทันจะ fallback เป็น JSON ในโปรเจกต์ก่อน
+  แล้วค่อยย้าย · หน้ารายการใช้ ISR revalidate 60 วินาที เพราะของใหม่ไม่ได้เข้าทุกวินาที
+- mutation: `createItem` เป็น Server Action เรียกจากฟอร์ม /sell แล้ว revalidate /items
+
+## 5. แบ่งงานกันยังไง
+
+- สมชาย: /items, /items/[id], การดึงข้อมูลฝั่ง server, deploy
+- มานี: /sell + zod schema, /favorites + Context, responsive
+```

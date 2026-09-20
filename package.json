@@ -1,5 +1,5 @@
 {
-  "name": "lab-day-04-start",
+  "name": "lab-day-05-start",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -9,11 +9,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.9.1",
     "@tailwindcss/vite": "^4.3.3",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
+    "react-hook-form": "^7.88.0",
     "react-router-dom": "^7.18.3",
-    "tailwindcss": "^4.3.3"
+    "tailwindcss": "^4.3.3",
+    "zod": "^4.6.5"
   },
   "devDependencies": {
     "@types/react": "^19.2.18",
