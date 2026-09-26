@@ -11,3 +11,4 @@ const FavoriteButton = () => {
         </button>
     )
 }
+export default FavoriteButton;
