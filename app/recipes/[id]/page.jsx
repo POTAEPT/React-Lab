@@ -9,6 +9,7 @@
 //   ⚠️ ต้องรอดทั้ง /recipes/99999 และ /recipes/xxxxx — เปิด lookup.php?i=99999 กับ ?i=xxxxx เทียบดูก่อน
 // Lab B c) — วาง <AddFavoriteButton /> ไว้ในหน้านี้ ส่ง mealId / name / thumb ลงไปเป็น props
 import { notFound } from "next/navigation"
+import AddFavoriteButton from "@/components/AddFavoriteButton"
 
 export default async function RecipeDetailPage({ params }) {
   const { id } = await params
@@ -48,6 +49,13 @@ export default async function RecipeDetailPage({ params }) {
     <article className="max-w-3xl mx-auto py-8 ">
       <h1 className="text-3xl font-bold">{recipe.strMeal}</h1>
       <p className="text-gray-500 text-sm mb-4">{recipe.strCategory}</p>
+
+      <AddFavoriteButton 
+        mealId={recipe.idMeal} 
+        name={recipe.strMeal} 
+        thumb={recipe.strMealThumb} 
+      />
+
       <img
         src={recipe.strMealThumb}
         alt={recipe.strMeal}
