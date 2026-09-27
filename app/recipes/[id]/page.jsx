@@ -19,13 +19,18 @@ export default async function RecipeDetailPage({ params }) {
     notFound()
   }
 
-  const data = await res.json()
-
-  if (!data || !data.meals || data.meals.length === 0) {
+  let data
+  try {
+    data = await res.json()
+  } catch {
     notFound()
   }
 
-  const recipe = data.meals[0]
+  // 99999 → { meals: null } · xxxxx → { meals: "Invalid ID" } ซึ่ง meals?.[0] เป็นตัวอักษร "I"
+  const recipe = Array.isArray(data?.meals) ? data.meals[0] : null
+  if (!recipe) {
+    notFound()
+  }
 
   const ingredients = []
   for (let i = 1; i <= 20; i++) {
