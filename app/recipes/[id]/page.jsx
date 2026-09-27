@@ -37,9 +37,12 @@ export default async function RecipeDetailPage({ params }) {
     }
   }
 
+  const instructions = (recipe.strInstructions ?? "").replace(/\u25a2/g, "").trim()
+
   return (
     <article className="max-w-3xl mx-auto py-8 ">
-      <h1 className="text-3xl font-bold mb-4">{recipe.strMeal}</h1>
+      <h1 className="text-3xl font-bold">{recipe.strMeal}</h1>
+      <p className="text-gray-500 text-sm mb-4">{recipe.strCategory}</p>
       <img
         src={recipe.strMealThumb}
         alt={recipe.strMeal}
@@ -49,8 +52,8 @@ export default async function RecipeDetailPage({ params }) {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
         <div className="md:col-span-1 border-r pr-4">
           {/* แสดงจำนวนวัตถุดิบตามที่คัดกรองมาได้ */}
-          <h2 className="text-xl font-semibold text-white mb-4">วัตถุดิบ ({ingredients.length} อย่าง)</h2>
-          <ul className="space-y-2 text-sm  text-white">
+          <h2 className="text-xl font-semibold mb-4">วัตถุดิบ ({ingredients.length} อย่าง)</h2>
+          <ul className="space-y-2 text-sm">
             {ingredients.map((item, index) => (
               <li key={index} className="border-b pb-2 last:border-0">{item}</li>
             ))}
@@ -59,9 +62,7 @@ export default async function RecipeDetailPage({ params }) {
 
         <div className="md:col-span-2">
           <h2 className="text-xl font-semibold mb-4">วิธีทำ</h2>
-          <p className=" text-white leading-relaxed whitespace-pre-line">
-            {recipe.strInstructions}
-          </p>
+          <p className="leading-relaxed whitespace-pre-line">{instructions}</p>
         </div>
       </div>
     </article>
