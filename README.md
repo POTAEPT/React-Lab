@@ -76,8 +76,8 @@ app/
 
 ### a) สร้าง `app/recipes/[id]/page.jsx` เป็น Server Component ใหม่ทั้งไฟล์
 
-- [ ] ดึงข้อมูลด้วย `await fetch(...)` ตรง ๆ ใน component (ไม่มี `"use client"`, ไม่มี `useEffect`/`useState`)
-- [ ] ใช้ TheMealDB `lookup.php?i={id}` ดึงสูตรตาม id
+- [x] ดึงข้อมูลด้วย `await fetch(...)` ตรง ๆ ใน component (ไม่มี `"use client"`, ไม่มี `useEffect`/`useState`)
+- [x] ใช้ TheMealDB `lookup.php?i={id}` ดึงสูตรตาม id
 - [ ] ⚠️ **Next.js 15 — `params` เป็น Promise ต้อง `await` ก่อนอ่านค่า** (`const { id } = await params`) ต่างจาก Next.js เวอร์ชันก่อนหน้าที่อ่านค่าตรง ๆ ได้เลย
 - [ ] แสดงรูป ชื่อ หมวดหมู่ และวิธีทำ
 - [ ] 🆕 **แสดงรายการวัตถุดิบพร้อมปริมาณ** เช่น `3/4 cup · soy sauce` และหัวข้อบอกจำนวน `วัตถุดิบ (9 อย่าง)` — ⚠️ TheMealDB **ไม่ได้ให้ ingredients มาเป็น array** แต่ให้เป็น field แบน ๆ 20 คู่ (`strIngredient1`…`strIngredient20` + `strMeasure1`…`strMeasure20`) ต้องแปลงเป็น array เอง แล้วตัดช่องที่ว่างทิ้ง (เปิด `lookup.php?i=52772` ดูใน browser ก่อนเขียน — ช่องว่างไม่ได้หน้าตาแบบเดียว)
