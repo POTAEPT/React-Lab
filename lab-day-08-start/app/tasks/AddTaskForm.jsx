@@ -29,7 +29,7 @@ const AddTaskForm = () => {
         <SubmitBtn />
       </div>
       {state.error && (
-        <p className="text-red-500" text-sm>
+        <p className="text-red-500 text-sm">
           {" "}
           {state.error}
         </p>

@@ -1,6 +1,7 @@
 // Server Component — 🔴 ห้ามใส่ "use client" ในไฟล์นี้
 import AddTaskForm from './AddTaskForm'
 import { getTasks } from '@/lib/taskStore'
+import { removeTask } from './actions'
 
 export default function TasksPage() {
   const tasks = getTasks();
