@@ -15,3 +15,14 @@ export async function addTask(formData) {
 
 // TODO Lab A ขั้น 2: removeTask(formData) — อ่าน id จาก <input type="hidden" name="id">
 // TODO Lab A ขั้น 2: toggleTask(formData) — ★ ของใหม่ ไม่ได้สาธิตตอนเช้า
+export const removeTask = async (formData) => {
+    const id = Number(formData.get("id"));
+    removeTaskFromStore(id);
+    revalidatePath("/tasks");
+};
+
+export const toggleTask = async (formData) => {
+    const id = Number(formData.get("id"));
+    toggleTaskInStore(id);
+    revalidatePath("/tasks");
+}
