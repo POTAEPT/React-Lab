@@ -3,22 +3,24 @@ import AddTaskForm from './AddTaskForm'
 import { getTasks } from '@/lib/taskStore'
 
 export default function TasksPage() {
-  const tasks = getTasks()
+  const tasks = getTasks();
 
   return (
-    <div className="p-6 max-w-md mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Task Board</h1>
-
+    <div className="p-6 max-w-md">
       <AddTaskForm />
-
-      <ul className="space-y-2">
-        {tasks.map(t => (
-          <li key={t.id} className="flex items-center justify-between border-b pb-2">
-            <span className={t.done ? "line-through text-gray-400" : ""}>{t.title}</span>
-            {/* TODO Lab A ขั้น 2: ปุ่ม "ทำเสร็จแล้ว"/"ยังไม่เสร็จ" + ปุ่ม "ลบ" — แต่ละปุ่มเป็น <form action={...}> ของตัวเอง */}
+      <ul className="mt-4">
+        {tasks.map((t) => (
+          <li key={t.id}>
+            {t.title}
+            <form action={removeTask}>
+              <input name="id" type="hidden" value={t.id} />
+              <button type="submit" className="text-red-600">
+                ลบเรยคัฟ
+              </button>
+            </form>
           </li>
         ))}
       </ul>
     </div>
-  )
+  );
 }
