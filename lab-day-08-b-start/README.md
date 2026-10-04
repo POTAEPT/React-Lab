@@ -75,4 +75,7 @@ README.md                   ← หลักฐาน Twist (ภาพ DevTools 
 **Lab B — คุณภาพ (40% ของคะแนนวันนี้)**
 - middleware auth guard บล็อกกรณีไม่ล็อกอินได้จริง — 40%
 - อธิบายได้ว่าทำไม server-side guard ปลอดภัยกว่า client-side guard เดิม — 30%
+> ตอบ: ข้อมูลลับจะไม่ถูกโชว์ให้สามารถค้นหาได้ ผ่าน DevTools แต่ในความเป็นจริงคือข้อมูลถูกบันทึกอยู่ในเครื่องเรียบร้อยแล้ว
 - ความลับไม่หลุดไปฝั่ง client: `/dashboard` เป็น Server Component · `DashboardPanel.jsx` ถูกลบ (ค้น `ยอดขายทั้งปี` ใน DevTools บน production build ต้องไม่เจอ) · secret อยู่ใน `.env.local` ไม่ hardcode — 30%
+
+
