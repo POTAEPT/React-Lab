@@ -22,3 +22,7 @@ export function removeTaskFromStore(id) {
 }
 
 // TODO Lab A ขั้น 1: toggleTaskDone(id) — สลับ done ของงานที่ id ตรง ให้ store.tasks = ... แบบเดียวกับ 2 ฟังก์ชันข้างบน (อย่าแก้ object เดิม ให้สร้างใหม่)
+
+export function toggleTaskDone(id) {
+  store.tasks = store.tasks.map(t => t.id === id ? { ...t, done: !t.done } : t)
+}
